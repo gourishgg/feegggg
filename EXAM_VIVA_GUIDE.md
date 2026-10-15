@@ -10,8 +10,7 @@
 ## 🏆 Summary of Rubric Alignment (Full 30/30 Marks)
 
 | Evaluation Rubric | Marks Allocated | Status | Key Implementation Files in Project |
-| :--- | :---: | :---: | :--- |
-| **Presentation (Component 1)** | **5 Marks** | ✅ Ready | `EXAM_VIVA_GUIDE.md`, Presentation Script, Portfolio (`/portfolio`) |
+| **Presentation (Component 1)** | **5 Marks** | ✅ Ready | `EXAM_VIVA_GUIDE.md`, Presentation Pitch Script, Interactive Demos |
 | **React Navigation Layout & Page Structure** | **7-8 Marks** | ✅ Complete | `App.jsx`, `Navbar.jsx`, `ProtectedRoute.jsx`, `src/pages/*` |
 | **Context API & State Architecture** | **6-8 Marks** | ✅ Complete | `ThemeContext.jsx`, `AuthContext.jsx`, `WeatherContext.jsx` |
 | **Intro to Redux Toolkit** | **3-5 Marks** | ✅ Complete | `src/redux/store.js`, `favoritesSlice.js`, `comparisonSlice.js`, `ReduxInspector.jsx` |
@@ -61,7 +60,6 @@ Open your browser and navigate to: **`http://localhost:3000`**
    - **`/portal`**: Main Weather Telemetry & Interactive Leaflet Vector Map.
    - **`/locations`**: Dedicated Locations DBMS table and cards with category filters and Redux bookmarking.
    - **`/analytics`**: Multi-city comparative weather telemetry powered by Redux Toolkit async thunks.
-   - **`/portfolio`**: **Mini Project: Team & Project Portfolio Site with Routing** (specifically required by the syllabus!).
    - **`/quick-search`**: Instant global city lookup.
    - **`/report`**: Citizen weather reporting and form validation showcase.
    - **`/login`**: Authentication route with protected route redirection.
@@ -152,7 +150,7 @@ Open your browser and navigate to: **`http://localhost:3000`**
 1. **Introduction (30 seconds):**
    - *"Good morning/afternoon professors. We present 'Desh Dekho', a geospatial weather telemetry and location Database Management System built using React 18, Vite, React Router, Redux Toolkit, and Node.js REST API."*
 2. **Navigation & SPA Architecture (45 seconds):**
-   - *"Our application features full client-side routing with React Router v6. Notice how the URL changes between the Map Portal (`/portal`), Locations DBMS (`/locations`), Analytics (`/analytics`), Citizen Report (`/report`), and our dedicated Team Portfolio (`/portfolio`)."*
+   - *"Our application features full client-side routing with React Router v6. Notice how the URL changes between the Map Portal (`/portal`), Locations DBMS (`/locations`), Analytics (`/analytics`), and Citizen Report (`/report`)."*
 3. **Context API & Theme (30 seconds):**
    - *(Click the theme toggle 🌙/☀️ in the navbar)*: *"We use React Context API for global state management: `AuthContext` for user sessions, `ThemeContext` for instant dark/light theme switching, and `WeatherContext` for live telemetry."*
 4. **Redux Toolkit & Async Thunk (45 seconds):**

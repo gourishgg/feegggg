@@ -111,11 +111,6 @@ export default function Navbar() {
             <span>📝</span>
             <span>Citizen Report</span>
           </NavLink>
-
-          <NavLink to="/portfolio" style={navLinkStyle}>
-            <span>🎓</span>
-            <span>Team Portfolio</span>
-          </NavLink>
         </nav>
       )}
 

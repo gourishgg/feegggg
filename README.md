@@ -13,7 +13,7 @@ A production-grade, responsive geospatial weather monitoring platform and locati
 | Rubric Component | Marks | Features Implemented |
 | :--- | :---: | :--- |
 | **Presentation (Component 1)** | **5 Marks** | Structured presentation walkthrough, high engagement visual aids, viva preparation guide (`EXAM_VIVA_GUIDE.md`). |
-| **React Navigation Layout & Page Structure** | **7-8 Marks** | Multi-page SPA navigation using `react-router-dom` v6 (`Routes`, `Route`, `NavLink`, `useNavigate`, `ProtectedRoute`, 404 fallback). Dedicated **Mini Project: Team Portfolio Site with Routing** (`/portfolio`). |
+| **React Navigation Layout & Page Structure** | **7-8 Marks** | Multi-page SPA navigation using `react-router-dom` v6 (`Routes`, `Route`, `NavLink`, `useNavigate`, `ProtectedRoute`, 404 fallback). Clean, modular layout with header, active links, and guards. |
 | **Context API & State Architecture** | **6-8 Marks** | Clean separation of Local State (`useState`), Context API (`AuthContext`, `ThemeContext` for dynamic Dark/Light modes, `WeatherContext` for global telemetry, async loading spinners & error handling). |
 | **Intro to Redux Toolkit** | **3-5 Marks** | Redux Toolkit store (`configureStore`), `favoritesSlice` (pinning & bookmarking locations with localStorage sync), `comparisonSlice` with `createAsyncThunk` (handling pending, fulfilled, rejected lifecycle), and a live floating **Redux Inspector** widget. |
 | **Form Handling in React** | **3-4 Marks** | Reusable input components (`TextInput`, `SelectInput`, `TextAreaInput`, `CheckboxInput`, `Button`) with `useFormValidation` custom hook supporting real-time validation, coordinate bounds (-90 to 90, -180 to 180), email regex, and touch states. |
@@ -26,7 +26,6 @@ A production-grade, responsive geospatial weather monitoring platform and locati
 - **`/portal`**: Interactive Leaflet vector map with live weather metrics, air quality breakdown, 5-day forecast, and Google Maps embed.
 - **`/locations`**: Master database management page with searchable/sortable table and cards, category filters, and Redux bookmarking.
 - **`/analytics`**: Multi-city comparative weather telemetry powered by Redux Toolkit `createAsyncThunk`.
-- **`/portfolio`**: Team portfolio site showcasing member contributions, architectural flowcharts, and evaluation rubrics.
 - **`/quick-search`**: Instant global city weather lookup with one-click DBMS saving.
 - **`/report`**: Citizen weather incident reporting form demonstrating reusable form components and validation strategies.
 - **`/login`**: Secure authentication gateway with login and sign-up modes.

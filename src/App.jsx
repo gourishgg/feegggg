@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import PortalPage from './pages/PortalPage';
 import LocationsPage from './pages/LocationsPage';
 import AnalyticsPage from './pages/AnalyticsPage';
-import PortfolioPage from './pages/PortfolioPage';
 import QuickSearchPage from './pages/QuickSearchPage';
 import FeedbackPage from './pages/FeedbackPage';
 import LoginPage from './pages/LoginPage';
@@ -51,7 +50,6 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/quick-search" element={<QuickSearchPage />} />
           <Route path="/report" element={<FeedbackPage />} />
           <Route path="/login" element={<LoginPage />} />
