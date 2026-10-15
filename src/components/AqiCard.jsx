@@ -59,7 +59,7 @@ export default function AqiCard() {
 
   return (
     <div style={{
-      marginTop: '20px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)',
+      marginTop: '20px', background: 'var(--input-bg)', border: '1px solid var(--card-border)',
       borderRadius: '18px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px'
     }}>
       <div>
@@ -73,11 +73,11 @@ export default function AqiCard() {
         {pollutant && <div style={{ marginTop: '6px', fontSize: '0.72rem', color: 'var(--text-sub)' }}>Dominant pollutant: {pollutantNames[pollutant]}</div>}
       </div>
 
-      <div style={{ display: 'flex', gap: '12px', fontSize: '0.8rem', color: 'var(--text-sub)', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: '12px', fontSize: '0.8rem', color: 'var(--text-main)', flexWrap: 'wrap' }}>
         {[
           ['PM2.5', 'pm2_5', 'µg/m³'], ['PM10', 'pm10', 'µg/m³'], ['NO₂', 'no2', 'µg/m³'], ['O₃', 'o3', 'µg/m³']
         ].map(([label, key, unit]) => (
-          <span key={key} style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '4px 8px', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
+          <span key={key} style={{ background: 'var(--card-bg)', padding: '4px 8px', borderRadius: '8px', border: '1px solid var(--card-border)', color: 'var(--text-main)' }}>
             {label}: {components[key] != null ? `${Number(components[key]).toFixed(1)} ${unit}` : '--'}
           </span>
         ))}

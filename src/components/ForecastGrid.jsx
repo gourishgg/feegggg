@@ -8,7 +8,7 @@ export default function ForecastGrid() {
   if (loadingWeather && (!forecastData || forecastData.length === 0)) {
     return (
       <div style={{ marginTop: '24px' }}>
-        <div style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '14px', color: '#fff' }}>
+        <div style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '14px', color: 'var(--text-main)' }}>
           📅 Loading 5-Day Forecast...
         </div>
         <div
@@ -48,7 +48,7 @@ export default function ForecastGrid() {
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          color: '#fff'
+          color: 'var(--text-main)'
         }}
       >
         📅 5-Day Weather Forecast for {currentLocation?.name || 'Selected Area'}
@@ -78,13 +78,13 @@ export default function ForecastGrid() {
             <div
               key={item.dt}
               style={{
-                background: 'rgba(255, 255, 255, 0.04)',
+                background: 'var(--card-bg)',
                 backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                border: '1px solid var(--card-border)',
                 borderRadius: '16px',
                 padding: '16px 12px',
                 textAlign: 'center',
-                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
+                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -115,7 +115,7 @@ export default function ForecastGrid() {
               />
 
               {/* Temperature */}
-              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>
+              <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-main)' }}>
                 {temp !== undefined ? formatTemp(temp) : '--'}
               </div>
 

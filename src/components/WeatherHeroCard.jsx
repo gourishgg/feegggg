@@ -79,7 +79,7 @@ export default function WeatherHeroCard() {
         }}
       >
         <div>
-          <h2 style={{ fontSize: '2.2rem', fontWeight: 700, color: '#fff', margin: 0 }}>
+          <h2 style={{ fontSize: '2.2rem', fontWeight: 700, color: 'var(--text-main)', margin: 0 }}>
             {currentLocation.name}
           </h2>
           <p
@@ -110,7 +110,7 @@ export default function WeatherHeroCard() {
             }}
           />
           <div>
-            <div style={{ fontSize: '4.2rem', fontWeight: 800, lineHeight: 1, color: '#fff' }}>
+            <div style={{ fontSize: '4.2rem', fontWeight: 800, lineHeight: 1, color: 'var(--text-main)' }}>
               {temp !== undefined ? formatTemp(temp) : '--'}
             </div>
             <div
@@ -139,8 +139,8 @@ export default function WeatherHeroCard() {
       >
         <div
           style={{
-            background: 'rgba(255, 255, 255, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            background: 'var(--input-bg)',
+            border: '1px solid var(--card-border)',
             borderRadius: '16px',
             padding: '16px',
             textAlign: 'center'
@@ -150,15 +150,15 @@ export default function WeatherHeroCard() {
           <div style={{ fontSize: '0.75rem', color: 'var(--text-sub, #94a3b8)', textTransform: 'uppercase' }}>
             Feels Like
           </div>
-          <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginTop: '4px' }}>
+          <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-main)', marginTop: '4px' }}>
             {feelsLike !== undefined ? formatTemp(feelsLike) : '--'}
           </div>
         </div>
 
         <div
           style={{
-            background: 'rgba(255, 255, 255, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            background: 'var(--input-bg)',
+            border: '1px solid var(--card-border)',
             borderRadius: '16px',
             padding: '16px',
             textAlign: 'center'
@@ -168,15 +168,15 @@ export default function WeatherHeroCard() {
           <div style={{ fontSize: '0.75rem', color: 'var(--text-sub, #94a3b8)', textTransform: 'uppercase' }}>
             Humidity
           </div>
-          <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginTop: '4px' }}>
+          <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-main)', marginTop: '4px' }}>
             {humidity !== undefined ? `${humidity}%` : '--'}
           </div>
         </div>
 
         <div
           style={{
-            background: 'rgba(255, 255, 255, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            background: 'var(--input-bg)',
+            border: '1px solid var(--card-border)',
             borderRadius: '16px',
             padding: '16px',
             textAlign: 'center'
@@ -186,15 +186,15 @@ export default function WeatherHeroCard() {
           <div style={{ fontSize: '0.75rem', color: 'var(--text-sub, #94a3b8)', textTransform: 'uppercase' }}>
             Wind Speed
           </div>
-          <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginTop: '4px' }}>
+          <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-main)', marginTop: '4px' }}>
             {windSpeed !== undefined ? `${windSpeed} m/s` : '--'}
           </div>
         </div>
 
         <div
           style={{
-            background: 'rgba(255, 255, 255, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            background: 'var(--input-bg)',
+            border: '1px solid var(--card-border)',
             borderRadius: '16px',
             padding: '16px',
             textAlign: 'center'
@@ -204,7 +204,7 @@ export default function WeatherHeroCard() {
           <div style={{ fontSize: '0.75rem', color: 'var(--text-sub, #94a3b8)', textTransform: 'uppercase' }}>
             Pressure
           </div>
-          <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginTop: '4px' }}>
+          <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-main)', marginTop: '4px' }}>
             {pressure !== undefined ? `${pressure} hPa` : '--'}
           </div>
         </div>
