@@ -4,72 +4,71 @@ import { useWeather } from '../context/WeatherContext';
 import { useNavigate } from 'react-router-dom';
 import TextInput from './common/form/TextInput';
 import Button from './common/form/Button';
-import { useFormValidation } from '../hooks/useFormValidation';
 
 export default function LoginView() {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { login, signup } = useAuth();
   const { showToast } = useWeather();
   const navigate = useNavigate();
 
-  const validationRules = {
-    username: [
-      { required: true, message: 'Username is required.' },
-      { minLength: 3, message: 'Username must be at least 3 characters.' }
-    ],
-    password: [
-      { required: true, message: 'Password is required.' },
-      { minLength: 6, message: 'Password must be at least 6 characters.' }
-    ],
-    confirmPassword: isSignUpMode ? [
-      { required: true, message: 'Please confirm your password.' },
-      {
-        custom: (val, allVals) => (val !== allVals.password ? 'Passwords do not match.' : '')
+  const validate = () => {
+    const errors = {};
+    const cleanUser = username.trim();
+    const cleanPass = password.trim();
+
+    if (!cleanUser) {
+      errors.username = 'Username is required.';
+    } else if (cleanUser.length < 3) {
+      errors.username = 'Username must be at least 3 characters.';
+    }
+
+    if (!cleanPass) {
+      errors.password = 'Password is required.';
+    } else if (cleanPass.length < 6) {
+      errors.password = 'Password must be at least 6 characters.';
+    }
+
+    if (isSignUpMode) {
+      if (!confirmPassword.trim()) {
+        errors.confirmPassword = 'Please confirm your password.';
+      } else if (confirmPassword !== password) {
+        errors.confirmPassword = 'Passwords do not match.';
       }
-    ] : []
-  };
+    }
 
-  const initialFormState = {
-    username: '',
-    password: '',
-    confirmPassword: ''
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
-
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    setIsSubmitting,
-    handleChange,
-    handleBlur,
-    validateAll,
-    resetForm
-  } = useFormValidation(initialFormState, validationRules);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isValid = validateAll();
-    if (!isValid) {
-      showToast('Please fix validation errors before submitting.', 'error');
+    if (!validate()) {
+      showToast('Please fix highlighted errors before continuing.', 'error');
       return;
     }
 
     setIsSubmitting(true);
     try {
       if (isSignUpMode) {
-        const res = signup(values.username.trim(), values.password.trim());
+        const res = signup(username, password);
         if (res.success) {
           showToast(res.message, 'success');
           setIsSignUpMode(false);
-          resetForm();
+          setPassword('');
+          setConfirmPassword('');
+          setFormErrors({});
         } else {
           showToast(res.message, 'error');
         }
       } else {
-        const res = login(values.username.trim(), values.password.trim());
+        const res = login(username, password);
         if (res.success) {
           showToast(res.message, 'success');
           navigate('/portal');
@@ -77,14 +76,40 @@ export default function LoginView() {
           showToast(res.message, 'error');
         }
       }
+    } catch (err) {
+      showToast(`Error: ${err.message}`, 'error');
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const handleQuickFillAdmin = () => {
+    setUsername('admin');
+    setPassword('password');
+    setConfirmPassword('');
+    setFormErrors({});
+    showToast('Auto-filled default admin credentials! Click "Login to Portal".', 'success');
+  };
+
+  const handleResetLocalStorage = () => {
+    try {
+      localStorage.setItem('users', JSON.stringify({ admin: 'password' }));
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('currentUser');
+      setUsername('admin');
+      setPassword('password');
+      setFormErrors({});
+      showToast('LocalStorage credentials reset! Default user: admin / password', 'success');
+    } catch (err) {
+      showToast('Failed to reset localStorage.', 'error');
+    }
+  };
+
   const toggleMode = () => {
     setIsSignUpMode(prev => !prev);
-    resetForm();
+    setPassword('');
+    setConfirmPassword('');
+    setFormErrors({});
   };
 
   return (
@@ -127,22 +152,24 @@ export default function LoginView() {
             {isSignUpMode ? 'Create Account' : 'Welcome Back'}
           </h2>
           <p style={{ color: 'var(--text-sub)', fontSize: '0.88rem', marginTop: '4px' }}>
-            {isSignUpMode ? 'Register to manage location DBMS & telemetry' : 'Login to access Codeverse Weather Portal'}
+            {isSignUpMode ? 'Sign up to access Codeverse Weather Portal' : 'Login to access Weather DBMS'}
           </p>
         </div>
 
-        {/* Form handling demonstration */}
+        {/* Authentication Form */}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <TextInput
             label="Username"
             name="username"
             required
-            placeholder="Enter your username"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.username}
-            touched={touched.username}
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              if (formErrors.username) setFormErrors(prev => ({ ...prev, username: '' }));
+            }}
+            error={formErrors.username}
+            touched={Boolean(formErrors.username)}
             icon="👤"
             helperText="Minimum 3 characters"
           />
@@ -152,12 +179,14 @@ export default function LoginView() {
             name="password"
             type={showPassword ? 'text' : 'password'}
             required
-            placeholder="Enter your password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.password}
-            touched={touched.password}
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (formErrors.password) setFormErrors(prev => ({ ...prev, password: '' }));
+            }}
+            error={formErrors.password}
+            touched={Boolean(formErrors.password)}
             icon="🔑"
             helperText="Minimum 6 characters"
             rightElement={
@@ -183,12 +212,14 @@ export default function LoginView() {
               name="confirmPassword"
               type={showPassword ? 'text' : 'password'}
               required
-              placeholder="Re-enter your password"
-              value={values.confirmPassword}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.confirmPassword}
-              touched={touched.confirmPassword}
+              placeholder="Confirm your password"
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                if (formErrors.confirmPassword) setFormErrors(prev => ({ ...prev, confirmPassword: '' }));
+              }}
+              error={formErrors.confirmPassword}
+              touched={Boolean(formErrors.confirmPassword)}
               icon="🔒"
             />
           )}
@@ -200,48 +231,64 @@ export default function LoginView() {
             isLoading={isSubmitting}
             style={{ marginTop: '8px' }}
           >
-            {isSignUpMode ? 'Register Account' : 'Login to Portal'}
+            {isSignUpMode ? 'Create Account & Sign Up' : 'Login to Portal'}
           </Button>
         </form>
 
-        {!isSignUpMode && (
-          <p
-            onClick={() => showToast('Default Credentials: Username: admin | Password: password', 'success')}
-            style={{
-              textAlign: 'center',
-              color: 'var(--accent-cyan)',
-              fontSize: '0.84rem',
-              marginTop: '16px',
-              cursor: 'pointer',
-              textDecoration: 'underline'
-            }}
-          >
-            💡 Default Credentials Hint (admin / password)
-          </p>
-        )}
-
-        <p style={{ textAlign: 'center', color: 'var(--text-sub)', fontSize: '0.88rem', marginTop: '20px' }}>
-          {isSignUpMode ? 'Already have an account?' : "Don't have an account?"}{' '}
-          <span
-            onClick={toggleMode}
-            style={{ color: 'var(--accent-cyan)', fontWeight: 600, cursor: 'pointer', textDecoration: 'underline' }}
-          >
-            {isSignUpMode ? 'Login' : 'Sign Up'}
-          </span>
-        </p>
-
-        {/* Rubric Tag for Evaluation */}
+        {/* Quick Admin Fill & Reset Helpers */}
         <div style={{
           marginTop: '20px',
-          padding: '8px 12px',
-          borderRadius: '10px',
-          background: 'rgba(56, 189, 248, 0.08)',
-          border: '1px solid rgba(56, 189, 248, 0.2)',
-          fontSize: '0.74rem',
-          color: 'var(--text-sub)',
-          textAlign: 'center'
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '8px',
+          alignItems: 'center'
         }}>
-          ✨ Uses Reusable Form Components & Custom Validation Hook
+          {!isSignUpMode && (
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button
+                type="button"
+                onClick={handleQuickFillAdmin}
+                style={{
+                  background: 'rgba(56, 189, 248, 0.12)',
+                  border: '1px solid rgba(56, 189, 248, 0.3)',
+                  color: 'var(--accent-cyan)',
+                  padding: '4px 10px',
+                  borderRadius: '8px',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                ⚡ 1-Click Auto Fill (admin / password)
+              </button>
+
+              <button
+                type="button"
+                onClick={handleResetLocalStorage}
+                style={{
+                  background: 'rgba(239, 68, 68, 0.12)',
+                  border: '1px solid rgba(239, 68, 68, 0.3)',
+                  color: '#fca5a5',
+                  padding: '4px 10px',
+                  borderRadius: '8px',
+                  fontSize: '0.78rem',
+                  cursor: 'pointer'
+                }}
+              >
+                🔄 Reset Users Storage
+              </button>
+            </div>
+          )}
+
+          <p style={{ textAlign: 'center', color: 'var(--text-sub)', fontSize: '0.88rem', marginTop: '12px' }}>
+            {isSignUpMode ? 'Already have an account?' : "Don't have an account?"}{' '}
+            <span
+              onClick={toggleMode}
+              style={{ color: 'var(--accent-cyan)', fontWeight: 600, cursor: 'pointer', textDecoration: 'underline' }}
+            >
+              {isSignUpMode ? 'Login' : 'Sign Up'}
+            </span>
+          </p>
         </div>
       </div>
     </div>
