@@ -53,7 +53,8 @@ A production-grade, responsive geospatial weather monitoring platform and locati
 - **Mapping**: Leaflet.js, OpenStreetMap, CARTO Dark Basemap, Esri Satellite Imagery
 - **APIs**: OpenWeatherMap API (Current Weather, 5-Day Forecast, Air Pollution, Direct Geocoding)
 - **Backend API**: Node.js HTTP Server (`server.js`) with REST endpoints and SPA fallback
-- **Storage**: Persistent `locations_db.json` storage + LocalStorage synchronization
+- **Database**: MySQL 8.0+ with connection pooling (`mysql2` driver)
+- **Storage**: MySQL database (`desh_dekho`) + LocalStorage synchronization
 
 ---
 
@@ -61,28 +62,52 @@ A production-grade, responsive geospatial weather monitoring platform and locati
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v16+ recommended)
+- [MySQL](https://dev.mysql.com/downloads/mysql/) (v8.0+ recommended)
 
 ### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-### 2. Build the Production Bundle
+### 2. Set up MySQL Database
+Create a `.env` file in the project root with your MySQL credentials:
+```bash
+cp .env.example .env
+# Edit .env with your MySQL credentials
+```
+
+**Required MySQL setup:**
+```sql
+-- Connect to MySQL as root
+mysql -u root -p
+
+-- Create database (optional - app creates it automatically)
+CREATE DATABASE desh_dekho CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create user (optional - for production)
+CREATE USER 'desh_dekho_user'@'localhost' IDENTIFIED BY 'secure_password';
+GRANT ALL PRIVILEGES ON desh_dekho.* TO 'desh_dekho_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+The application will automatically create the `locations` table and seed initial data on first run.
+
+### 3. Build the Production Bundle
 ```bash
 npm run build
 ```
 
-### 3. Start the Backend Server & Web Application
+### 4. Start the Backend Server & Web Application
 ```bash
 npm start
 ```
 Open your browser at: **`http://localhost:3000`**
 
-### 4. Development Mode (Hot Reload)
+### 5. Development Mode (Hot Reload)
 ```bash
 npm run dev
 ```
-Accessible at: **`http://localhost:5173`**
+Accessible at: **`http://localhost:5173`** (requires backend running on port 3000)
 
 ### Default Login Credentials:
 - **Username:** `admin`
