@@ -87,7 +87,7 @@ export default function AnalyticsPage() {
         boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
       }}>
         <div>
-          <span style={{
+          {/* <span style={{
             fontSize: '0.78rem',
             padding: '3px 10px',
             borderRadius: '20px',
@@ -97,13 +97,11 @@ export default function AnalyticsPage() {
             letterSpacing: '0.5px'
           }}>
             REDUX TOOLKIT ASYNC THUNK DEMO
-          </span>
+          </span> */}
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-main)', marginTop: '6px' }}>
             📊 Comparative Telemetry & Analytics
           </h2>
-          <p style={{ color: 'var(--text-sub)', fontSize: '0.9rem', maxWidth: '650px', marginTop: '4px' }}>
-            Multi-city weather comparison powered by Redux Toolkit slice architecture, <code>createAsyncThunk</code>, and immutable state updates.
-          </p>
+        
         </div>
 
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
@@ -373,7 +371,7 @@ export default function AnalyticsPage() {
       )}
 
       {/* Redux Toolkit Architecture Explainer Card */}
-      <div style={{
+      {/* <div style={{
         background: 'rgba(124, 58, 237, 0.08)',
         border: '1px solid rgba(168, 85, 247, 0.3)',
         borderRadius: '20px',
@@ -406,7 +404,7 @@ export default function AnalyticsPage() {
             <strong><code>useSelector</code> &amp; <code>useDispatch</code>:</strong> React-Redux hooks connecting component views to global Redux state with zero prop-drilling.
           </li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 }

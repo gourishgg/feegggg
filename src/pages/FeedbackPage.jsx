@@ -152,23 +152,11 @@ export default function FeedbackPage() {
         padding: '28px',
         boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
       }}>
-        <span style={{
-          fontSize: '0.78rem',
-          padding: '3px 10px',
-          borderRadius: '20px',
-          background: 'rgba(56, 189, 248, 0.15)',
-          color: 'var(--accent-cyan)',
-          fontWeight: 700,
-          letterSpacing: '0.5px'
-        }}>
-          RUBRIC EVALUATION: FORM HANDLING &amp; REUSABLE INPUTS
-        </span>
+        
         <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-main)', marginTop: '8px' }}>
           📝 Citizen Weather Report &amp; Validation Showcase
         </h2>
-        <p style={{ color: 'var(--text-sub)', fontSize: '0.92rem', maxWidth: '750px', marginTop: '6px', lineHeight: 1.5 }}>
-          Demonstrates advanced form handling in React with <strong>reusable input components</strong> (<code>TextInput</code>, <code>SelectInput</code>, <code>TextAreaInput</code>, <code>CheckboxInput</code>, <code>Button</code>) coupled with the <code>useFormValidation</code> custom hook executing real-time field validation, email regex, boundary checks, and touch states.
-        </p>
+        
       </div>
 
       <div style={{

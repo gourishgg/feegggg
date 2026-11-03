@@ -152,7 +152,7 @@ export default function LoginView() {
             {isSignUpMode ? 'Create Account' : 'Welcome Back'}
           </h2>
           <p style={{ color: 'var(--text-sub)', fontSize: '0.88rem', marginTop: '4px' }}>
-            {isSignUpMode ? 'Sign up to access Codeverse Weather Portal' : 'Login to access Weather DBMS'}
+            {isSignUpMode ? 'Sign up to access Desh Dekho' : 'Login to access'}
           </p>
         </div>
 
@@ -245,38 +245,9 @@ export default function LoginView() {
         }}>
           {!isSignUpMode && (
             <div style={{ display: 'flex', gap: '12px' }}>
-              <button
-                type="button"
-                onClick={handleQuickFillAdmin}
-                style={{
-                  background: 'rgba(56, 189, 248, 0.12)',
-                  border: '1px solid rgba(56, 189, 248, 0.3)',
-                  color: 'var(--accent-cyan)',
-                  padding: '4px 10px',
-                  borderRadius: '8px',
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
-                  cursor: 'pointer'
-                }}
-              >
-                ⚡ 1-Click Auto Fill (admin / password)
-              </button>
+              
 
-              <button
-                type="button"
-                onClick={handleResetLocalStorage}
-                style={{
-                  background: 'rgba(239, 68, 68, 0.12)',
-                  border: '1px solid rgba(239, 68, 68, 0.3)',
-                  color: '#fca5a5',
-                  padding: '4px 10px',
-                  borderRadius: '8px',
-                  fontSize: '0.78rem',
-                  cursor: 'pointer'
-                }}
-              >
-                🔄 Reset Users Storage
-              </button>
+             
             </div>
           )}
 

@@ -1,20 +1,30 @@
+
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useWeather } from '../context/WeatherContext';
 import { useTheme } from '../context/ThemeContext';
-import ReduxFavoritesTray from './ReduxFavoritesTray';
 
 export default function Navbar() {
   const { isLoggedIn, currentUser, logout } = useAuth();
-  const { isFahrenheit, setIsFahrenheit, setIsDbmsModalOpen, showToast } = useWeather();
-  const { theme, toggleTheme, isDark } = useTheme();
+  const {
+    isFahrenheit,
+    setIsFahrenheit,
+    setIsDbmsModalOpen,
+    showToast,
+  } = useWeather();
+
+  const { toggleTheme, isDark } = useTheme();
   const navigate = useNavigate();
 
   const toggleUnit = () => {
-    setIsFahrenheit(prev => {
+    setIsFahrenheit((prev) => {
       const next = !prev;
-      showToast(`Switched temperature display to ${next ? 'Fahrenheit (°F)' : 'Celsius (°C)'}`);
+      showToast(
+        `Switched temperature display to ${
+          next ? 'Fahrenheit (°F)' : 'Celsius (°C)'
+        }`
+      );
       return next;
     });
   };
@@ -31,62 +41,68 @@ export default function Navbar() {
     transition: 'all 0.2s ease',
     color: isActive ? 'var(--accent-cyan)' : 'var(--text-sub)',
     background: isActive ? 'rgba(56, 189, 248, 0.15)' : 'transparent',
-    border: `1px solid ${isActive ? 'var(--accent-cyan)' : 'transparent'}`
+    border: `1px solid ${
+      isActive ? 'var(--accent-cyan)' : 'transparent'
+    }`,
   });
 
   return (
-    <header style={{
-      padding: '12px 28px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      background: 'var(--nav-bg)',
-      backdropFilter: 'blur(16px)',
-      borderBottom: '1px solid var(--card-border)',
-      position: 'sticky',
-      top: 0,
-      zIndex: 1000,
-      flexWrap: 'wrap',
-      gap: '12px'
-    }}>
-      {/* Brand Logo & Title */}
-      <div 
-        onClick={() => navigate(isLoggedIn ? '/portal' : '/login')} 
-        style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}
+    <header
+      style={{
+        padding: '12px 28px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        background: 'var(--nav-bg)',
+        backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid var(--card-border)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
+        flexWrap: 'wrap',
+        gap: '12px',
+      }}
+    >
+      <div
+        onClick={() => navigate(isLoggedIn ? '/portal' : '/login')}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          cursor: 'pointer',
+        }}
       >
         <span style={{ fontSize: '2rem', lineHeight: 1 }}>🇮🇳</span>
+
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <h1 style={{
+          <h1
+            style={{
               fontSize: '1.3rem',
               fontWeight: 800,
               background: 'linear-gradient(90deg, #ff7043, #38bdf8, #a855f7)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              letterSpacing: '-0.5px'
-            }}>
-              Desh Dekho
-            </h1>
-            <span style={{
-              fontSize: '0.68rem',
-              padding: '2px 6px',
-              borderRadius: '6px',
-              background: 'rgba(168, 85, 247, 0.2)',
-              color: 'var(--accent-purple)',
-              fontWeight: 700
-            }}>
-              FEE-II
-            </span>
-          </div>
+              letterSpacing: '-0.5px',
+            }}
+          >
+            Desh Dekho
+          </h1>
+
           <p style={{ fontSize: '0.74rem', color: 'var(--text-sub)' }}>
-            Weather Portal & Location DBMS
+            Weather Portal &amp; Location Database
           </p>
         </div>
       </div>
 
-      {/* React Router SPA Navigation Links */}
       {isLoggedIn && (
-        <nav style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <nav
+          style={{
+            display: 'flex',
+            gap: '6px',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
           <NavLink to="/portal" style={navLinkStyle}>
             <span>🌤️</span>
             <span>Map Portal</span>
@@ -99,7 +115,7 @@ export default function Navbar() {
 
           <NavLink to="/analytics" style={navLinkStyle}>
             <span>📊</span>
-            <span>Comparison & RTK</span>
+            <span>Comparison &amp; RTK</span>
           </NavLink>
 
           <NavLink to="/quick-search" style={navLinkStyle}>
@@ -111,12 +127,34 @@ export default function Navbar() {
             <span>📝</span>
             <span>Citizen Report</span>
           </NavLink>
+
+          <div
+            style={{
+              fontSize: '0.82rem',
+              color: 'var(--text-main)',
+              background: 'var(--input-bg)',
+              padding: '6px 12px',
+              borderRadius: '12px',
+              border: '1px solid var(--card-border)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+          >
+            <span>👤</span>
+            <strong style={{ fontWeight: 600 }}>{currentUser}</strong>
+          </div>
         </nav>
       )}
 
-      {/* Header Actions (Theme, Units, Redux, Auth) */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-        {/* Theme Toggle Button (Context API) */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          flexWrap: 'wrap',
+        }}
+      >
         <button
           onClick={toggleTheme}
           title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
@@ -131,13 +169,12 @@ export default function Navbar() {
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '1.1rem',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         >
           {isDark ? '🌙' : '☀️'}
         </button>
 
-        {/* Temperature Unit Toggle Button */}
         <button
           onClick={toggleUnit}
           title="Toggle Celsius / Fahrenheit"
@@ -149,7 +186,7 @@ export default function Navbar() {
             borderRadius: '12px',
             fontWeight: 700,
             fontSize: '0.82rem',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         >
           {isFahrenheit ? '°F' : '°C'}
@@ -157,10 +194,6 @@ export default function Navbar() {
 
         {isLoggedIn ? (
           <>
-            {/* Redux Favorites Tray Dropdown */}
-            <ReduxFavoritesTray />
-
-            {/* Quick DBMS Manager Modal Trigger */}
             <button
               onClick={() => setIsDbmsModalOpen(true)}
               style={{
@@ -172,7 +205,6 @@ export default function Navbar() {
                 fontWeight: 600,
                 fontSize: '0.82rem',
                 cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(168, 85, 247, 0.3)'
               }}
             >
               ➕ Add / Manage
@@ -208,7 +240,7 @@ export default function Navbar() {
                 borderRadius: '12px',
                 fontSize: '0.8rem',
                 fontWeight: 600,
-                cursor: 'pointer'
+                cursor: 'pointer',
               }}
             >
               Logout
@@ -225,7 +257,7 @@ export default function Navbar() {
               borderRadius: '12px',
               fontWeight: 700,
               fontSize: '0.86rem',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
           >
             Login / Sign Up

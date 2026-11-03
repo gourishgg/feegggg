@@ -23,7 +23,7 @@ export default function ReduxFavoritesTray() {
   };
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', display: 'inline-block' }}>
       <button
         onClick={() => setIsOpen(prev => !prev)}
         style={{
@@ -40,7 +40,7 @@ export default function ReduxFavoritesTray() {
           cursor: 'pointer'
         }}
       >
-        <span>❤️ Redux Favorites</span>
+        <span>❤️ Favorites</span>
         <span style={{
           background: '#ef4444',
           color: '#fff',
@@ -64,10 +64,14 @@ export default function ReduxFavoritesTray() {
             style={{ position: 'fixed', inset: 0, zIndex: 1100 }}
           />
           <div style={{
-            position: 'absolute',
-            right: 0,
-            top: 'calc(100% + 10px)',
-            width: '320px',
+           position: 'fixed',
+top: '115px',
+left: '12px',
+width: '320px',
+maxWidth: 'calc(100vw - 24px)',
+maxHeight: 'calc(100vh - 130px)',
+overflowY: 'auto',
+boxSizing: 'border-box',
             background: 'var(--modal-bg)',
             backdropFilter: 'blur(16px)',
             border: '1px solid var(--card-border)',
@@ -82,7 +86,7 @@ export default function ReduxFavoritesTray() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-main)' }}>
-                  Redux Store Favorites
+                  Store Favorites
                 </h4>
                 <span style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)' }}>
                   State managed by Redux Toolkit

@@ -239,20 +239,9 @@ export default function DbmsModal() {
               <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-main)' }}>
                 🗄️ Location Database Manager
               </h2>
-              <span style={{
-                fontSize: '0.72rem',
-                background: 'rgba(56, 189, 248, 0.2)',
-                color: 'var(--accent-cyan)',
-                padding: '2px 8px',
-                borderRadius: '8px',
-                fontWeight: 600
-              }}>
-                Reusable Forms & Validation
-              </span>
+              
             </div>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-sub)' }}>
-              Full CRUD operations, persistent REST API, geo-coordinates validation & Redux bookmarking.
-            </p>
+           
           </div>
 
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -497,7 +486,7 @@ export default function DbmsModal() {
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
                 <thead>
                   <tr style={{ background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-sub)', borderBottom: '1px solid var(--card-border)' }}>
-                    <th style={{ padding: '12px 16px' }}>Fav (Redux)</th>
+                    <th style={{ padding: '12px 16px' }}>Fav </th>
                     <th style={{ padding: '12px 16px' }}>Name</th>
                     <th style={{ padding: '12px 16px' }}>State</th>
                     <th style={{ padding: '12px 16px' }}>Category</th>
@@ -517,7 +506,7 @@ export default function DbmsModal() {
                               dispatch(toggleFavorite(loc.id));
                               showToast(isFav ? `Removed ${loc.name} from Redux Favorites` : `Added ${loc.name} to Redux Favorites!`);
                             }}
-                            title={isFav ? 'Remove from Redux Favorites' : 'Add to Redux Favorites'}
+                            title={isFav ? 'Remove from Favorites' : 'Add to Favorites'}
                             style={{
                               background: 'none',
                               border: 'none',

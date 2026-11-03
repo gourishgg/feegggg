@@ -83,9 +83,7 @@ export default function LocationsPage() {
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-main)', marginTop: '6px' }}>
             🗄️ Location Master Database
           </h2>
-          <p style={{ color: 'var(--text-sub)', fontSize: '0.9rem', maxWidth: '600px', marginTop: '4px' }}>
-            Manage persistent geospatial records across India. Fully synchronized with our Node.js REST API and backed by Redux Toolkit favorites state.
-          </p>
+          
         </div>
 
         {/* Action Buttons */}
@@ -142,7 +140,7 @@ export default function LocationsPage() {
           <div style={{ fontSize: '2rem' }}>❤️</div>
           <div>
             <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#f87171' }}>{favoriteIds.length}</div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--text-sub)' }}>Redux Favorites Bookmarked</div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-sub)' }}>Favorites Bookmarked</div>
           </div>
         </div>
 
